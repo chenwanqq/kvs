@@ -1,7 +1,7 @@
 use serde::{Deserialize,Serialize};
 use std::collections::HashMap;
-use std::fs;
-use std::io::{BufReader, BufWriter, Read, Seek, Write};
+use std::fs::{self, File};
+use std::io::{BufReader, BufWriter};
 #[derive(Debug,Deserialize,Serialize)]
 struct Data {
     tstamp: i64,
@@ -27,13 +27,16 @@ struct ValueIndex{
 
 pub struct BitCask {
     index: HashMap<String,ValueIndex>,
-    readers: HashMap<usize,BufReader<R>>,
-    writer: BufWriter<W>,
+    readers: HashMap<usize,BufReader<File>>,
+    writer: BufWriter<File>,
 }
 
 
 impl BitCask {
-    fn open(workDir: &str) -> Result<BitCask,&'static str> {
+    fn get_hint_ids(workDir: &str) -> Result<Vec<usize>,&'static str>{
+        let mut hint_ids = fs::read_dir(workDir).unwrap().map()
+    }
+    pub fn open(workDir: &str) -> Result<BitCask,&'static str> {
         let paths =  fs::read_dir(workDir).unwrap();
         let mut index = HashMap::new();
     }

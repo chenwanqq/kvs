@@ -1,5 +1,6 @@
 use serde::{Deserialize,Serialize};
 use std::collections::HashMap;
+use std::fmt::Error;
 use std::fs::{self, File};
 use std::io::{BufReader, BufWriter};
 #[derive(Debug,Deserialize,Serialize)]
@@ -33,11 +34,15 @@ pub struct BitCask {
 
 
 impl BitCask {
-    fn get_hint_ids(workDir: &str) -> Result<Vec<usize>,&'static str>{
-        let mut hint_ids = fs::read_dir(workDir).unwrap().map()
+    fn get_hint_ids(workDir: &str) -> std::io::Result<Vec<usize>>{
+        let mut hint_ids = Vec::new();
+        for _res in fs::read_dir(workDir) {
+            
+        }
+
     }
-    pub fn open(workDir: &str) -> Result<BitCask,&'static str> {
-        let paths =  fs::read_dir(workDir).unwrap();
+    pub fn open(workDir: &str) -> std::io::Result<BitCask> {
+        let paths =  fs::read_dir(workDir)?;
         let mut index = HashMap::new();
     }
 }

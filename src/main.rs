@@ -4,6 +4,7 @@ use clap::Parser;
 use clap::Subcommand;
 mod store;
 use store::kvStore::KvStore;
+use store::bitCask::BitCask;
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Args {

@@ -3,8 +3,10 @@ use std::process::exit;
 use clap::Parser;
 use clap::Subcommand;
 mod store;
+use kvs::store::bitCask;
 use store::kvStore::KvStore;
 use store::bitCask::BitCask;
+use csv;
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Args {
@@ -27,6 +29,7 @@ enum Commands {
 }
 
 fn main() {
+    /*
     let args = Args::parse();
     match args.command {
         Commands::SET { key, value } => {
@@ -42,4 +45,6 @@ fn main() {
             exit(1);
         }
     }
+    */
+    BitCask::read_csv("/home/chenwanqq/rustlearning/kvs/store/0.hint");
 }
